@@ -3,6 +3,7 @@ import type { Entity } from '../../shared/types';
 import { useCampaign } from '../state/CampaignContext';
 import { computeGraph } from '../lib/graph';
 import { computeBacklinks } from '../lib/linking';
+import { assetUrl } from '../lib/assets';
 import LinkedText from './LinkedText';
 import Tag from './Tag';
 
@@ -117,7 +118,11 @@ function Dossier({
   return (
     <div className="dossier">
       <div className="dossier-head">
-        <div className="dossier-portrait">portrait<br />placeholder</div>
+        <div className={`dossier-portrait${entity.images[0] ? ' has-image' : ''}`}>
+          {entity.images[0]
+            ? <img src={assetUrl(campaign.id, entity.images[0].filename)} alt={entity.images[0].caption || entity.title} />
+            : <>portrait<br />placeholder</>}
+        </div>
         <div style={{ minWidth: 0 }}>
           <div className="kicker" style={{ marginBottom: 7 }}>
             {entity.type === 'character' ? 'Character' : 'Faction'}{entity.isPC ? ' · my PC' : ''}

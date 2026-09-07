@@ -20,8 +20,31 @@ npm run dev      # launches the app with hot reload
 ```sh
 npm run build     # type-checks and produces dist/ + dist-electron/
 npm run typecheck # type-check only
-npm run dist       # build + package with electron-builder
 ```
+
+## Building an executable
+
+```sh
+npm run dist
+```
+
+This runs the production build and then packages it with
+[electron-builder](https://www.electron.build/) for whatever platform you run it on,
+into `app/release/`:
+
+- **macOS** → a `.dmg` and a `.zip` (run on a Mac — Apple doesn't allow cross-building
+  macOS installers from Linux/Windows)
+- **Windows** → an NSIS installer `.exe`
+- **Linux** → an `.AppImage` (portable, no install needed) and a `.deb`
+
+To build for just one platform: `npm run dist -- --mac`, `--win`, or `--linux`. The
+first run downloads a matching Electron binary for the target platform/arch (~100MB),
+so it needs network access once.
+
+There's no app icon yet (the mockups didn't include one), so packaged builds use
+electron-builder's default icon — drop an `icon.png`/`icon.icns`/`icon.ico` under
+`build/` and point `build.mac.icon` / `build.win.icon` / `build.linux.icon` at it in
+`package.json` when you have one.
 
 ## What's implemented
 
@@ -51,6 +74,16 @@ Auto-linking and backlinks are computed live from a dictionary of every article'
 and aliases (`src/lib/linking.ts`) — there's no manual `[[wikilink]]` syntax to maintain;
 mentioning a name is enough. Repeated proper-noun phrases that don't match any article
 yet are flagged as link suggestions.
+
+Every article (and thread) can also carry images — drag-and-drop or "Add image" in the
+gallery under its header, with an editable caption per image and a click-to-expand
+lightbox (`ImageGallery.tsx`). A character's first image doubles as their portrait in
+the relationship map's dossier panel. Images aren't inlined into the JSON campaign file
+as base64 — they're written as separate files under a per-campaign assets folder in
+Electron's userData directory and served to the renderer through a custom
+`rpnotes-asset://` protocol registered in `electron/main.ts` (see `saveImageAsset` /
+`resolveAssetPath` in `electron/store.ts`), so the campaign file stays small and images
+aren't duplicated in memory as data URLs.
 
 ## Project layout
 

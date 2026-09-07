@@ -3,6 +3,8 @@
   "productName": "Roleplay Notes",
   "version": "0.1.0",
   "description": "A desktop wiki-style note-keeping app for play-by-post and Discord text roleplay, with automatic mention linking, backlinks, a relationship map, and full-text search.",
+  "author": "KaiLeroy",
+  "repository": "https://github.com/KaiLeroy/roleplaying-notekeeper",
   "private": true,
   "main": "dist-electron/main.js",
   "type": "module",
@@ -12,6 +14,29 @@
     "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p electron/tsconfig.json",
     "preview": "electron-vite preview",
     "dist": "electron-vite build && electron-builder"
+  },
+  "build": {
+    "appId": "com.roleplaynotes.app",
+    "productName": "Roleplay Notes",
+    "files": [
+      "dist/**/*",
+      "dist-electron/**/*",
+      "package.json"
+    ],
+    "directories": {
+      "output": "release"
+    },
+    "mac": {
+      "target": ["dmg", "zip"],
+      "category": "public.app-category.productivity"
+    },
+    "win": {
+      "target": ["nsis"]
+    },
+    "linux": {
+      "target": ["AppImage", "deb"],
+      "category": "Utility"
+    }
   },
   "dependencies": {
     "nanoid": "^5.0.7",

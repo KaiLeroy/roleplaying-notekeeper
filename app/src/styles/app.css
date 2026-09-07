@@ -130,6 +130,46 @@ body { overflow: hidden; }
 
 .empty-pane { flex: 1; display: flex; align-items: center; justify-content: center; color: rgba(233,233,237,.35); font-size: 13px; flex-direction: column; gap: 10px; }
 
+/* ── image gallery ────────────────────────────────────────────────────── */
+.image-gallery { margin: 4px 0 22px; border-radius: 10px; transition: box-shadow .1s; }
+.image-gallery.drag-over { box-shadow: 0 0 0 1.5px var(--color-accent); background: rgba(145,132,217,.06); }
+.image-gallery-head { display: flex; align-items: center; margin-bottom: 10px; }
+.image-dropzone-empty {
+  border: 1px dashed var(--color-divider); border-radius: 8px; padding: 14px;
+  font-size: 12px; color: rgba(233,233,237,.4); text-align: center;
+}
+.image-grid { display: flex; flex-wrap: wrap; gap: 12px; }
+.image-tile { width: 128px; flex: none; position: relative; }
+.image-tile-frame {
+  display: block; width: 128px; height: 96px; border-radius: 8px; overflow: hidden;
+  background: var(--color-surface); box-shadow: inset 0 0 0 1px var(--color-divider); padding: 0;
+}
+.image-tile-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.image-remove-btn {
+  position: absolute; top: 5px; right: 5px; width: 20px; height: 20px; border-radius: 50%;
+  display: grid; place-items: center; background: rgba(15,17,28,.75); color: #fff;
+  opacity: 0; transition: opacity .1s;
+}
+.image-tile:hover .image-remove-btn { opacity: 1; }
+.image-caption-input {
+  width: 100%; margin-top: 5px; background: none; border: none; font-size: 11px;
+  color: rgba(233,233,237,.55); padding: 0; font-family: inherit;
+}
+.image-caption-input::placeholder { color: rgba(233,233,237,.28); }
+.image-caption-input:focus-visible { outline: none; color: var(--color-text); }
+
+.lightbox-backdrop {
+  position: fixed; inset: 0; z-index: 120; background: rgba(9,10,16,.88);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 40px;
+}
+.lightbox-img { max-width: 100%; max-height: calc(100vh - 140px); border-radius: 8px; box-shadow: var(--shadow-lg); }
+.lightbox-caption { color: rgba(233,233,237,.75); font-size: 13px; max-width: 640px; text-align: center; }
+.lightbox-close {
+  position: absolute; top: 18px; right: 22px; width: 34px; height: 34px; border-radius: 50%;
+  display: grid; place-items: center; background: rgba(255,255,255,.08); color: #fff;
+}
+.lightbox-close:hover { background: rgba(255,255,255,.16); }
+
 /* ── backlink rail ────────────────────────────────────────────────────── */
 .backlink-rail { width: 286px; flex: none; padding: 24px 20px; background: #13151f; display: flex; flex-direction: column; gap: 20px; overflow-y: auto; }
 .rail-label { color: rgba(233,233,237,.4); margin-bottom: 11px; display: block; }
@@ -223,6 +263,8 @@ body { overflow: hidden; }
   box-shadow: inset 0 0 0 1px #3f424d; display: grid; place-items: center; text-align: center;
   font-size: 9.5px; line-height: 1.3; color: rgba(233,233,237,.35); padding: 6px;
 }
+.dossier-portrait.has-image { padding: 0; }
+.dossier-portrait img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; display: block; }
 .dossier-name { font-size: 23px; font-weight: 500; line-height: 1.15; }
 .dossier-sub { font-size: 12.5px; color: rgba(233,233,237,.55); margin-top: 4px; }
 .dossier-tags { display: flex; gap: 5px; margin-top: 9px; flex-wrap: wrap; }
