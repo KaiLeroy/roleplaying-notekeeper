@@ -13,6 +13,15 @@ export interface Post {
   createdAt: number;
 }
 
+export interface ArticleImage {
+  id: string;
+  /** Filename on disk, under this campaign's asset folder (e.g. "<id>.png"). */
+  filename: string;
+  /** Original filename, for display/alt text. */
+  name: string;
+  caption: string;
+}
+
 export interface Relation {
   id: string;
   /** Entity id this relation is attached to (the dossier owner). */
@@ -43,6 +52,7 @@ export interface Entity {
   posts: Post[];
   /** Only meaningful for characters/factions: manually curated "standing with" bars shown in the dossier. */
   relations: Relation[];
+  images: ArticleImage[];
   pinned: boolean;
   createdAt: number;
   updatedAt: number;

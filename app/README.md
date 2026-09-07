@@ -75,6 +75,16 @@ and aliases (`src/lib/linking.ts`) — there's no manual `[[wikilink]]` syntax t
 mentioning a name is enough. Repeated proper-noun phrases that don't match any article
 yet are flagged as link suggestions.
 
+Every article (and thread) can also carry images — drag-and-drop or "Add image" in the
+gallery under its header, with an editable caption per image and a click-to-expand
+lightbox (`ImageGallery.tsx`). A character's first image doubles as their portrait in
+the relationship map's dossier panel. Images aren't inlined into the JSON campaign file
+as base64 — they're written as separate files under a per-campaign assets folder in
+Electron's userData directory and served to the renderer through a custom
+`rpnotes-asset://` protocol registered in `electron/main.ts` (see `saveImageAsset` /
+`resolveAssetPath` in `electron/store.ts`), so the campaign file stays small and images
+aren't duplicated in memory as data URLs.
+
 ## Project layout
 
 ```

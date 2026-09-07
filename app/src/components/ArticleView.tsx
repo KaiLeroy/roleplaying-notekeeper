@@ -5,6 +5,7 @@ import { useCampaign } from '../state/CampaignContext';
 import { segmentText, unlinkedSuggestionsIn, collectTextBlobs, countBlobsMentioning } from '../lib/linking';
 import LinkedText from './LinkedText';
 import BacklinkRail from './BacklinkRail';
+import ImageGallery from './ImageGallery';
 import Tag from './Tag';
 import { SparkleIcon } from './icons';
 
@@ -101,6 +102,8 @@ export default function ArticleView({
             placeholder="aka: alternate names, comma separated (matched for auto-linking too)"
             onChange={(e) => updateEntity(entity.id, { aliases: e.target.value.split(',').map((s) => s.trim()).filter(Boolean) })}
           />
+
+          <ImageGallery entityId={entity.id} images={entity.images} />
 
           <div className="article-toolbar">
             <button className="btn btn-secondary" onClick={() => setEditing((v) => !v)}>{editing ? 'Done' : 'Edit'}</button>

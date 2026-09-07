@@ -5,6 +5,7 @@ import { segmentText, mentionedEntityIds, unlinkedSuggestionsIn } from '../lib/l
 import { initials, relativeTime } from '../lib/id';
 import LinkedText from './LinkedText';
 import Tag from './Tag';
+import ImageGallery from './ImageGallery';
 import SelectionPopover from './SelectionPopover';
 import MentionHighlightTextarea from './MentionHighlightTextarea';
 
@@ -86,6 +87,7 @@ export default function ThreadView({
             placeholder="What's this scene? (optional)"
             onChange={(e) => updateEntity(entity.id, { subtitle: e.target.value })}
           />
+          <ImageGallery entityId={entity.id} images={entity.images} />
         </div>
 
         {entity.posts.length === 0 && (
