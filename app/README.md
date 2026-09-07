@@ -20,8 +20,31 @@ npm run dev      # launches the app with hot reload
 ```sh
 npm run build     # type-checks and produces dist/ + dist-electron/
 npm run typecheck # type-check only
-npm run dist       # build + package with electron-builder
 ```
+
+## Building an executable
+
+```sh
+npm run dist
+```
+
+This runs the production build and then packages it with
+[electron-builder](https://www.electron.build/) for whatever platform you run it on,
+into `app/release/`:
+
+- **macOS** → a `.dmg` and a `.zip` (run on a Mac — Apple doesn't allow cross-building
+  macOS installers from Linux/Windows)
+- **Windows** → an NSIS installer `.exe`
+- **Linux** → an `.AppImage` (portable, no install needed) and a `.deb`
+
+To build for just one platform: `npm run dist -- --mac`, `--win`, or `--linux`. The
+first run downloads a matching Electron binary for the target platform/arch (~100MB),
+so it needs network access once.
+
+There's no app icon yet (the mockups didn't include one), so packaged builds use
+electron-builder's default icon — drop an `icon.png`/`icon.icns`/`icon.ico` under
+`build/` and point `build.mac.icon` / `build.win.icon` / `build.linux.icon` at it in
+`package.json` when you have one.
 
 ## What's implemented
 
