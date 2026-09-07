@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<meta name="design_doc_mode" content="canvas">
+<link rel="stylesheet" href="_ds/nocturne-648884d4-f5a1-42ca-90a9-5610ec36800b/styles.css">
+<script src="_ds/nocturne-648884d4-f5a1-42ca-90a9-5610ec36800b/_ds_bundle.js"></script>
+<style>
+body{margin:0;background:#0f111c;font-family:"Inter",system-ui,sans-serif}
+a{color:var(--color-accent);text-decoration:none}
+a:hover{color:var(--color-accent-400)}
+.dv-turn{padding:40px 44px 32px;border-bottom:1px solid rgba(255,255,255,.07);scroll-margin-top:16px}
+.dv-thd{display:flex;align-items:baseline;gap:10px;margin:0 0 20px}
+.dv-tid{font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:var(--color-accent-800);color:var(--color-accent-100);border-radius:4px;text-decoration:none}
+.dv-tname{font:500 13px/1.2 "Inter",system-ui,sans-serif;color:var(--color-text)}
+.dv-opts{display:flex;flex-wrap:wrap;gap:34px;align-items:flex-start}
+.dv-opt{flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px}
+.dv-oid{font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(233,233,237,.1);color:var(--color-text);border-radius:5px;text-decoration:none}
+.dv-olabel{display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 "Inter",system-ui,sans-serif;color:rgba(233,233,237,.55)}
+.dv-card{background:var(--color-bg);border-radius:10px;box-shadow:var(--shadow-md);overflow:hidden}
+.dv-opt:target .dv-oid{background:var(--color-accent);color:#161826}
+.dv-next{margin:22px 0 0;font:12px/1.6 "Inter",system-ui,sans-serif;color:rgba(233,233,237,.45)}
+.wl{color:var(--color-accent-300);border-bottom:1px solid rgba(145,132,217,.45);cursor:pointer}
+.wl:hover{color:var(--color-accent-200);background:rgba(145,132,217,.12)}
+.sug{border-bottom:1px dashed rgba(145,132,217,.75);cursor:pointer;background:rgba(145,132,217,.07)}
+</style>
+</helmet>
+
+<section class="dv-turn" id="t1">
+<div class="dv-thd"><a class="dv-tid" href="#t1">1</a><span class="dv-tname">Four directions — linking behavior &amp; navigation model</span></div>
+<div class="dv-opts">
+
+<!-- ─────────────── 1a — wiki desk ─────────────── -->
+<div class="dv-opt" id="1a">
+  <div class="dv-olabel"><a class="dv-oid" href="#1a">1a</a>Wiki desk — sidebar tree, article, backlink rail. Auto-detected mentions sit inline as dashed text.</div>
+  <div class="dv-card" data-screen-label="1a Wiki desk" style="width:1280px;height:820px;display:flex;flex-direction:column;color:var(--color-text);font-size:15px">
+
+    <div style="display:flex;align-items:center;gap:14px;padding:10px 16px;background:linear-gradient(180deg,#1b1d2c,#161826)">
+      <div style="display:flex;gap:6px"><span style="width:10px;height:10px;border-radius:50%;background:#3f424d"></span><span style="width:10px;height:10px;border-radius:50%;background:#3f424d"></span><span style="width:10px;height:10px;border-radius:50%;background:#3f424d"></span></div>
+      <div style="font-weight:500;font-size:14px;margin-left:8px">Ashfall Compact</div>
+      <div style="display:flex;align-items:center;gap:7px;font-size:12px;color:rgba(233,233,237,.5)">
+        <span>Places</span><span>/</span><span style="color:var(--color-text)">The Undermarket</span>
+      </div>
+      <div style="margin-left:auto;display:flex;align-items:center;gap:8px">
+        <div style="display:flex;align-items:center;gap:7px;width:250px;padding:6px 10px;background:var(--color-surface);border:1px solid var(--color-divider);border-radius:8px;font-size:13px;color:rgba(233,233,237,.45)">
+          <svg width="14" height="14" viewBox="0 0 256 256" fill="currentColor"><path d="M229.7 218.3l-43.3-43.3a92.1 92.1 0 10-11.4 11.4l43.3 43.3a8 8 0 0011.4-11.4zM40 112a72 72 0 1172 72 72.1 72.1 0 01-72-72z"></path></svg>
+          Search notes<span style="margin-left:auto;font:10px ui-monospace,monospace;padding:1px 5px;border:1px solid var(--color-divider);border-radius:4px">⌘K</span>
+        </div>
+        <button class="btn btn-primary" style="font-size:13px">New note</button>
+      </div>
+    </div>
+
+    <div style="display:flex;flex:1;min-height:0">
+      <!-- sidebar -->
+      <sc-if value="{{ fullSidebar }}" hint-placeholder-val="{{ true }}">
+      <div style="width:224px;flex:none;padding:14px 10px;background:#13151f;display:flex;flex-direction:column;gap:14px;overflow:hidden">
+        <div style="display:flex;flex-direction:column;gap:1px">
+          <div style="display:flex;align-items:center;gap:8px;padding:6px 9px;border-radius:6px;font-size:13px;color:rgba(233,233,237,.75)">Threads<span style="margin-left:auto;font-size:11px;color:rgba(233,233,237,.35)">4</span></div>
+          <div style="display:flex;align-items:center;gap:8px;padding:6px 9px;border-radius:6px;font-size:13px;color:rgba(233,233,237,.75)">Characters<span style="margin-left:auto;font-size:11px;color:rgba(233,233,237,.35)">31</span></div>
+          <div style="display:flex;align-items:center;gap:8px;padding:6px 9px;border-radius:6px;font-size:13px;background:rgba(145,132,217,.14);color:var(--color-accent-200)">Places<span style="margin-left:auto;font-size:11px;color:rgba(233,233,237,.45)">12</span></div>
+          <div style="display:flex;align-items:center;gap:8px;padding:6px 9px;border-radius:6px;font-size:13px;color:rgba(233,233,237,.75)">Factions<span style="margin-left:auto;font-size:11px;color:rgba(233,233,237,.35)">6</span></div>
+          <div style="display:flex;align-items:center;gap:8px;padding:6px 9px;border-radius:6px;font-size:13px;color:rgba(233,233,237,.75)">Unsorted<span style="margin-left:auto;font-size:11px;color:var(--color-accent)">9</span></div>
+        </div>
+        <div style="height:1px;background:linear-gradient(to right,transparent,var(--color-divider),transparent)"></div>
+        <div style="display:flex;flex-direction:column;gap:2px">
+          <div style="font:500 10px/1 'Inter';letter-spacing:.09em;text-transform:uppercase;color:rgba(233,233,237,.4);padding:0 9px 6px">Places</div>
+          <sc-for list="{{ places }}" as="p" hint-placeholder-count="6">
+            <div style="display:flex;align-items:center;gap:8px;padding:5px 9px;border-radius:6px;font-size:13px;color:rgba(233,233,237,.68)">
+              <span style="width:5px;height:5px;border-radius:50%;background:#595d6c;flex:none"></span>{{ p.name }}
+            </div>
+          </sc-for>
+          <div style="display:flex;align-items:center;gap:8px;padding:5px 9px;border-radius:6px;font-size:13px;background:var(--color-surface);color:var(--color-text);box-shadow:inset 0 0 0 1px rgba(145,132,217,.35)">
+            <span style="width:5px;height:5px;border-radius:50%;background:var(--color-accent);flex:none"></span>The Undermarket
+          </div>
+          <sc-for list="{{ placesB }}" as="p" hint-placeholder-count="3">
+            <div style="display:flex;align-items:center;gap:8px;padding:5px 9px;border-radius:6px;font-size:13px;color:rgba(233,233,237,.68)">
+              <span style="width:5px;height:5px;border-radius:50%;background:#595d6c;flex:none"></span>{{ p.name }}
+            </div>
+          </sc-for>
+        </div>
+        <div style="margin-top:auto;font-size:11px;color:rgba(233,233,237,.35);padding:0 9px">58 notes · 214 links</div>
+      </div>
+      </sc-if>
+
+      <!-- article -->
+      <div style="flex:1;min-width:0;padding:30px 40px 0;overflow:hidden">
+        <div style="max-width:620px">
+          <div style="font:500 10px/1 'Inter';letter-spacing:.11em;text-transform:uppercase;color:var(--color-accent);margin-bottom:10px">Place · District</div>
+          <h1 style="font-size:38px;margin:0 0 10px">The Undermarket</h1>
+          <div style="display:flex;gap:6px;margin-bottom:20px">
+            <span class="tag tag-neutral">Kestrel Landing</span>
+            <span class="tag tag-neutral">neutral ground</span>
+            <span class="tag tag-outline">visited</span>
+          </div>
+          <p style="font-size:15px;line-height:1.65;color:rgba(233,233,237,.86)">Three levels of flooded cistern under <span class="wl">Kestrel Landing</span>, drained by the <span class="wl">Tidewright Union</span> and never re-plumbed. Stalls run on the second gallery; the third is water again by midwinter.</p>
+          <p style="font-size:15px;line-height:1.65;color:rgba(233,233,237,.86)">No faction holds it outright. <span class="wl">House Calder</span> keeps two collectors at the stair, and everyone pretends not to see them. <span class="sug">Sirin Vale</span> runs messages through the fish gallery on nights the tide is high — she took Verrin's letter on night three without asking who it was for.</p>
+          <p style="font-size:15px;line-height:1.65;color:rgba(233,233,237,.86)">Standing rule of the place, repeated at the stair by whoever is collecting: no blades drawn below the waterline. Enforced by the crowd rather than by anyone in particular.</p>
+
+          <sc-if value="{{ showSuggestions }}" hint-placeholder-val="{{ true }}">
+          <div style="margin-top:22px;padding:12px 14px;border-radius:8px;background:var(--color-surface);box-shadow:inset 0 0 0 1px rgba(145,132,217,.3);display:flex;align-items:center;gap:12px">
+            <svg width="17" height="17" viewBox="0 0 256 256" fill="var(--color-accent)" style="flex:none"><path d="M137.5 22.5a8 8 0 00-13.6 4l-8.9 44.5-38.2-22.9a8 8 0 00-10.4 11.8l28.6 34.4-44.2 10.4a8 8 0 00.4 15.6l44.7 8.4-24.6 37.7a8 8 0 0011.1 11.1l37.7-24.6 8.4 44.7a8 8 0 0015.6.4l10.4-44.2 34.4 28.6a8 8 0 0011.8-10.4l-22.9-38.2 44.5-8.9a8 8 0 004-13.6z"></path></svg>
+            <div style="flex:1;min-width:0">
+              <div style="font-size:13px;font-weight:500">1 name in this note isn't linked yet</div>
+              <div style="font-size:12px;color:rgba(233,233,237,.55)">“Sirin Vale” — appears in 3 other notes. Create a character article and link all 4?</div>
+            </div>
+            <button class="btn btn-secondary" style="font-size:12px">Ignore</button>
+            <button class="btn btn-primary" style="font-size:12px">Create &amp; link</button>
+          </div>
+          </sc-if>
+        </div>
+      </div>
+
+      <!-- backlink rail -->
+      <sc-if value="{{ showBacklinkRail }}" hint-placeholder-val="{{ true }}">
+      <div style="width:286px;flex:none;padding:24px 20px;background:#13151f;display:flex;flex-direction:column;gap:20px;overflow:hidden">
+        <div>
+          <div style="font:500 10px/1 'Inter';letter-spacing:.09em;text-transform:uppercase;color:rgba(233,233,237,.4);margin-bottom:11px">Linked from · 7</div>
+          <div style="display:flex;flex-direction:column;gap:9px">
+            <sc-for list="{{ backlinks }}" as="b" hint-placeholder-count="4">
+              <div style="padding:9px 11px;border-radius:8px;background:var(--color-surface)">
+                <div style="display:flex;align-items:baseline;gap:7px;margin-bottom:3px">
+                  <span style="font-size:12.5px;font-weight:500">{{ b.title }}</span>
+                  <span style="font-size:10px;color:rgba(233,233,237,.4);margin-left:auto">{{ b.kind }}</span>
+                </div>
+                <div style="font-size:11.5px;line-height:1.45;color:rgba(233,233,237,.55)">{{ b.quote }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <div>
+          <div style="font:500 10px/1 'Inter';letter-spacing:.09em;text-transform:uppercase;color:rgba(233,233,237,.4);margin-bottom:11px">Mentioned here</div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px">
+            <span class="tag tag-accent">Kestrel Landing</span>
+            <span class="tag tag-accent">Tidewright Union</span>
+            <span class="tag tag-accent">House Calder</span>
+            <span class="tag tag-outline">Sirin Vale ?</span>
+          </div>
+        </div>
+        <div style="margin-top:auto;font-size:11px;color:rgba(233,233,237,.35);line-height:1.5">Last edited 2 days ago, from thread <span style="color:rgba(233,233,237,.6)">Night Three</span></div>
+      </div>
+      </sc-if>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────── 1b — thread capture ─────────────── -->
+<div class="dv-opt" id="1b">
+  <div class="dv-olabel"><a class="dv-oid" href="#1b">1b</a>Capture beside the thread — select any word in a post to spin up an article without leaving your place.</div>
+  <div class="dv-card" data-screen-label="1b Thread capture" style="width:1280px;height:820px;display:flex;flex-direction:column;color:var(--color-text);font-size:15px;position:relative">
+
+    <div style="display:flex;align-items:center;gap:14px;padding:10px 16px;background:linear-gradient(180deg,#1b1d2c,#161826)">
+      <div style="display:flex;gap:6px"><span style="width:10px;height:10px;border-radius:50%;background:#3f424d"></span><span style="width:10px;height:10px;border-radius:50%;background:#3f424d"></span><span style="width:10px;height:10px;border-radius:50%;background:#3f424d"></span></div>
+      <div style="font-weight:500;font-size:14px;margin-left:8px">Ashfall Compact</div>
+      <div style="font-size:12px;color:rgba(233,233,237,.5)">Thread · <span style="color:var(--color-text)">Night Three — the fish gallery</span> · 41 posts</div>
+      <div style="margin-left:auto;display:flex;align-items:center;gap:8px">
+        <span class="tag tag-accent-2">Reading · post 38</span>
+        <button class="btn btn-secondary" style="font-size:13px">Jump to unread</button>
+      </div>
+    </div>
+
+    <div style="display:flex;flex:1;min-height:0">
+      <div style="width:56px;flex:none;background:#13151f;padding:14px 0;display:flex;flex-direction:column;align-items:center;gap:6px">
+        <sc-for list="{{ railIcons }}" as="i" hint-placeholder-count="5">
+          <div style="width:34px;height:34px;border-radius:8px;display:grid;place-items:center;font-size:11px;color:rgba(233,233,237,.5);background:rgba(233,233,237,.04)">{{ i.abbr }}</div>
+        </sc-for>
+      </div>
+
+      <!-- thread column -->
+      <div style="flex:1;min-width:0;padding:22px 26px;display:flex;flex-direction:column;gap:16px;overflow:hidden;position:relative">
+        <sc-for list="{{ posts }}" as="post" hint-placeholder-count="2">
+          <div style="display:flex;gap:13px">
+            <div style="width:34px;height:34px;border-radius:8px;flex:none;background:#2b2e3d;display:grid;place-items:center;font-size:11px;color:rgba(233,233,237,.5)">{{ post.initials }}</div>
+            <div style="min-width:0">
+              <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:5px">
+                <span style="font-size:13px;font-weight:500">{{ post.author }}</span>
+                <span style="font-size:11px;color:rgba(233,233,237,.4)">{{ post.when }}</span>
+              </div>
+              <div style="font-size:14.5px;line-height:1.6;color:rgba(233,233,237,.82)">{{ post.body }}</div>
+            </div>
+          </div>
+        </sc-for>
+
+        <!-- the post being read, with a live selection -->
+        <div style="display:flex;gap:13px">
+          <div style="width:34px;height:34px;border-radius:8px;flex:none;background:#2b2e3d;display:grid;place-items:center;font-size:11px;color:rgba(233,233,237,.5)">EM</div>
+          <div style="min-width:0">
+            <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:5px">
+              <span style="font-size:13px;font-weight:500">emberwake</span>
+              <span style="font-size:11px;color:rgba(233,233,237,.4)">2h ago · post 38</span>
+            </div>
+            <div style="font-size:14.5px;line-height:1.6;color:rgba(233,233,237,.86)">The collector at the stair waves them through without counting. Below the waterline the noise doubles: cages, water, someone arguing about the price of ice. <span style="background:rgba(145,132,217,.32);box-shadow:0 0 0 1px rgba(145,132,217,.55);border-radius:3px;padding:1px 2px">Halvard Reest</span> is waiting on the third gallery with his back to the wall and both hands visible, which is his way of saying he came to talk.</div>
+
+            <!-- selection popover -->
+            <div style="margin-top:10px;width:330px;border-radius:10px;background:#232532;box-shadow:var(--shadow-lg);overflow:hidden">
+              <div style="padding:10px 13px 8px">
+                <div style="font-size:11px;color:rgba(233,233,237,.45);margin-bottom:2px">Selected</div>
+                <div style="font-size:14px;font-weight:500">Halvard Reest</div>
+              </div>
+              <div style="height:1px;background:var(--color-divider)"></div>
+              <div style="padding:5px">
+                <div style="display:flex;align-items:center;gap:9px;padding:8px 9px;border-radius:7px;font-size:13px;background:rgba(145,132,217,.16);color:var(--color-accent-200)">
+                  <svg width="15" height="15" viewBox="0 0 256 256" fill="currentColor"><path d="M224 128a8 8 0 01-8 8h-80v80a8 8 0 01-16 0v-80H40a8 8 0 010-16h80V40a8 8 0 0116 0v80h80a8 8 0 018 8z"></path></svg>
+                  New character article<span style="margin-left:auto;font:10px ui-monospace,monospace;opacity:.7">↵</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:9px;padding:8px 9px;border-radius:7px;font-size:13px;color:rgba(233,233,237,.8)">
+                  <svg width="15" height="15" viewBox="0 0 256 256" fill="currentColor"><path d="M137.5 118.5a8 8 0 010 11.3l-28.3 28.3a40 40 0 01-56.6-56.6l28.3-28.2a8 8 0 0111.3 11.3l-28.3 28.3a24 24 0 0033.9 33.9l28.3-28.3a8 8 0 0111.4 0zm66-66a40 40 0 00-56.6 0l-28.2 28.3a8 8 0 0011.3 11.3l28.3-28.3a24 24 0 0133.9 33.9l-28.3 28.3a8 8 0 0011.3 11.3l28.3-28.3a40 40 0 000-56.5z"></path></svg>
+                  Link to existing… <span style="color:rgba(233,233,237,.4)">3 near matches</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:9px;padding:8px 9px;border-radius:7px;font-size:13px;color:rgba(233,233,237,.8)">
+                  <svg width="15" height="15" viewBox="0 0 256 256" fill="currentColor"><path d="M243.3 136.8l-16.1-16a8 8 0 00-11.3 0L136 200.7V216h15.3l80-79.9a8 8 0 000-11.3zM32 64h96a8 8 0 000-16H32a8 8 0 000 16zm0 48h72a8 8 0 000-16H32a8 8 0 000 16zm64 32H32a8 8 0 000 16h64a8 8 0 000-16z"></path></svg>
+                  Add as alias of <span style="color:var(--color-accent-300)">Reest</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:9px;padding:8px 9px;border-radius:7px;font-size:13px;color:rgba(233,233,237,.8)">
+                  Quote into a loose note<span style="margin-left:auto;font:10px ui-monospace,monospace;opacity:.7">⇧↵</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- capture pane -->
+      <div style="width:392px;flex:none;background:#13151f;display:flex;flex-direction:column">
+        <div style="padding:16px 18px 12px;display:flex;align-items:center;gap:8px">
+          <div style="font:500 10px/1 'Inter';letter-spacing:.09em;text-transform:uppercase;color:rgba(233,233,237,.4)">Draft note · Night Three</div>
+          <span class="tag tag-neutral" style="margin-left:auto">autosaved</span>
+        </div>
+        <div style="flex:1;padding:0 18px;overflow:hidden">
+          <div style="font-size:14px;line-height:1.65;color:rgba(233,233,237,.85)">
+            Tide was high, so <span class="wl">Sirin Vale</span> was running messages. Took the letter without asking.<br><br>
+            <span class="wl">Halvard Reest</span> waiting on the third gallery, hands visible. Wants to talk about the ice contract — says <span class="wl">House Calder</span> is buying up cold storage under three different names.<br><br>
+            Ask <span class="wl">Verrin</span> whether the letter ever arrived.<span style="display:inline-block;width:1.5px;height:16px;background:var(--color-accent);vertical-align:-3px;margin-left:1px"></span>
+          </div>
+        </div>
+        <div style="padding:12px 18px;display:flex;flex-direction:column;gap:9px">
+          <div style="font-size:11px;color:rgba(233,233,237,.45)">Linked as you typed</div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px">
+            <span class="tag tag-accent">Sirin Vale</span>
+            <span class="tag tag-accent">House Calder</span>
+            <span class="tag tag-accent">Verrin Oleska</span>
+            <span class="tag tag-outline">Halvard Reest · new</span>
+          </div>
+          <div style="display:flex;gap:7px;margin-top:4px">
+            <button class="btn btn-primary btn-block" style="margin:0">Save to thread</button>
+            <button class="btn btn-secondary" style="white-space:nowrap">Open as article</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────── 1c — map as navigation ─────────────── -->
+<div class="dv-opt" id="1c">
+  <div class="dv-olabel"><a class="dv-oid" href="#1c">1c</a>Map as the navigation — the link graph is the home screen; selecting a node opens its dossier.</div>
+  <div class="dv-card" data-screen-label="1c Relationship map" style="width:1280px;height:820px;display:flex;flex-direction:column;color:var(--color-text);font-size:15px">
+
+    <div style="display:flex;align-items:center;gap:14px;padding:10px 16px;background:linear-gradient(180deg,#1b1d2c,#161826)">
+      <div style="display:flex;gap:6px"><span style="width:10px;height:10px;border-radius:50%;background:#3f424d"></span><span style="width:10px;height:10px;border-radius:50%;background:#3f424d"></span><span style="width:10px;height:10px;border-radius:50%;background:#3f424d"></span></div>
+      <div style="font-weight:500;font-size:14px;margin-left:8px">Ashfall Compact</div>
+      <div class="seg" style="margin-left:8px">
+        <label class="seg-opt"><input type="radio" name="c-view" checked>Map</label>
+        <label class="seg-opt"><input type="radio" name="c-view">List</label>
+        <label class="seg-opt"><input type="radio" name="c-view">Timeline</label>
+      </div>
+      <div style="margin-left:auto;display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(233,233,237,.5)">
+        <span>Filter</span><span class="tag tag-neutral">Characters</span><span class="tag tag-neutral">Factions</span><span class="tag tag-outline">Places off</span>
+      </div>
+    </div>
+
+    <div style="display:flex;flex:1;min-height:0">
+      <!-- graph canvas -->
+      <div style="flex:1;min-width:0;position:relative;background:radial-gradient(120% 90% at 30% 20%,#1b1e30 0%,#141622 70%)">
+        <svg viewBox="0 0 700 700" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%">
+          <g stroke="#5d5294" stroke-width="1.4" fill="none" opacity=".75">
+            <path d="M350 340 L170 190"></path>
+            <path d="M350 340 L560 210"></path>
+            <path d="M350 340 L180 520"></path>
+            <path d="M350 340 L540 500"></path>
+            <path d="M170 190 L560 210" stroke-dasharray="5 6" opacity=".5"></path>
+            <path d="M540 500 L560 210" stroke-dasharray="5 6" opacity=".5"></path>
+            <path d="M180 520 L540 500" opacity=".5"></path>
+            <path d="M170 190 L110 380" opacity=".5"></path>
+            <path d="M540 500 L620 640" opacity=".5"></path>
+          </g>
+        </svg>
+        <sc-for list="{{ nodes }}" as="n" hint-placeholder-count="7">
+          <div style="{{ n.style }}">{{ n.name }}</div>
+        </sc-for>
+        <div style="position:absolute;left:24px;bottom:20px;display:flex;flex-direction:column;gap:7px;font-size:11px;color:rgba(233,233,237,.5)">
+          <div style="display:flex;align-items:center;gap:8px"><span style="width:22px;height:1.4px;background:#8a7ed0"></span>appears together in a thread</div>
+          <div style="display:flex;align-items:center;gap:8px"><span style="width:22px;height:0;border-top:1.4px dashed #8a7ed0"></span>mentioned but never met</div>
+        </div>
+        <div style="position:absolute;right:20px;bottom:20px;display:flex;gap:6px">
+          <button class="btn btn-secondary btn-icon">−</button>
+          <button class="btn btn-secondary btn-icon">+</button>
+        </div>
+      </div>
+
+      <!-- dossier -->
+      <div style="width:376px;flex:none;background:#13151f;padding:22px 22px 18px;display:flex;flex-direction:column;gap:16px;overflow:hidden">
+        <div style="display:flex;gap:14px;align-items:flex-start">
+          <div style="width:76px;height:96px;flex:none;border-radius:8px;background:#22242f;box-shadow:inset 0 0 0 1px #3f424d;display:grid;place-items:center;text-align:center;font-size:9.5px;line-height:1.3;color:rgba(233,233,237,.35);padding:6px">portrait<br>placeholder</div>
+          <div style="min-width:0">
+            <div style="font:500 10px/1 'Inter';letter-spacing:.11em;text-transform:uppercase;color:var(--color-accent);margin-bottom:7px">Character · my PC</div>
+            <div style="font-size:23px;font-weight:500;line-height:1.15">Verrin Oleska</div>
+            <div style="font-size:12.5px;color:rgba(233,233,237,.55);margin-top:4px">letter-carrier, formerly Tidewright</div>
+            <div style="display:flex;gap:5px;margin-top:9px"><span class="tag tag-neutral">31 links</span><span class="tag tag-neutral">4 threads</span></div>
+          </div>
+        </div>
+
+        <div style="height:1px;background:linear-gradient(to right,transparent,var(--color-divider),transparent)"></div>
+
+        <div>
+          <div style="font:500 10px/1 'Inter';letter-spacing:.09em;text-transform:uppercase;color:rgba(233,233,237,.4);margin-bottom:10px">Standing with</div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <sc-for list="{{ relations }}" as="r" hint-placeholder-count="4">
+              <div style="display:flex;align-items:center;gap:10px">
+                <span style="font-size:13px;width:124px;flex:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ r.name }}</span>
+                <span style="flex:1;height:4px;border-radius:2px;background:#2b2e3d;position:relative;overflow:hidden"><span style="{{ r.barStyle }}"></span></span>
+                <span style="font-size:11px;color:rgba(233,233,237,.5);width:62px;text-align:right">{{ r.label }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div>
+          <div style="font:500 10px/1 'Inter';letter-spacing:.09em;text-transform:uppercase;color:rgba(233,233,237,.4);margin-bottom:10px">Open threads on her</div>
+          <div style="display:flex;flex-direction:column;gap:7px">
+            <div style="padding:9px 11px;border-radius:8px;background:var(--color-surface);font-size:12.5px;line-height:1.45">The letter to <span class="wl">Halvard Reest</span> — sent night 3, no reply</div>
+            <div style="padding:9px 11px;border-radius:8px;background:var(--color-surface);font-size:12.5px;line-height:1.45">Owes <span class="wl">Sirin Vale</span> a favor, unspecified</div>
+          </div>
+        </div>
+
+        <div style="margin-top:auto;display:flex;gap:7px">
+          <button class="btn btn-primary" style="flex:1">Open article</button>
+          <button class="btn btn-secondary" style="flex:1">Trace links</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────── 1d — search palette ─────────────── -->
+<div class="dv-opt" id="1d">
+  <div class="dv-olabel"><a class="dv-oid" href="#1d">1d</a>Search as the whole navigation model — one palette over the page, results carry backlink counts and a live preview.</div>
+  <div class="dv-card" data-screen-label="1d Search and backlinks" style="width:1280px;height:820px;position:relative;color:var(--color-text);font-size:15px;overflow:hidden">
+
+    <div style="position:absolute;inset:0;filter:blur(2px);opacity:.5;padding:0">
+      <div style="display:flex;align-items:center;gap:14px;padding:10px 16px;background:#1b1d2c">
+        <div style="display:flex;gap:6px"><span style="width:10px;height:10px;border-radius:50%;background:#3f424d"></span><span style="width:10px;height:10px;border-radius:50%;background:#3f424d"></span><span style="width:10px;height:10px;border-radius:50%;background:#3f424d"></span></div>
+        <div style="font-weight:500;font-size:14px;margin-left:8px">Ashfall Compact</div>
+      </div>
+      <div style="padding:36px 60px;max-width:640px">
+        <div style="height:11px;width:180px;border-radius:3px;background:#2b2e3d;margin-bottom:22px"></div>
+        <div style="height:30px;width:340px;border-radius:5px;background:#33364a;margin-bottom:20px"></div>
+        <sc-for list="{{ ghostLines }}" as="g" hint-placeholder-count="8">
+          <div style="{{ g.style }}"></div>
+        </sc-for>
+      </div>
+    </div>
+    <div style="position:absolute;inset:0;background:rgba(15,17,28,.62)"></div>
+
+    <div style="position:absolute;left:50%;top:74px;transform:translateX(-50%);width:820px;border-radius:14px;background:#232532;box-shadow:var(--shadow-lg);overflow:hidden;display:flex;flex-direction:column;max-height:660px">
+      <div style="display:flex;align-items:center;gap:11px;padding:15px 18px">
+        <svg width="18" height="18" viewBox="0 0 256 256" fill="rgba(233,233,237,.45)"><path d="M229.7 218.3l-43.3-43.3a92.1 92.1 0 10-11.4 11.4l43.3 43.3a8 8 0 0011.4-11.4zM40 112a72 72 0 1172 72 72.1 72.1 0 01-72-72z"></path></svg>
+        <span style="font-size:19px">ice contract<span style="display:inline-block;width:1.5px;height:19px;background:var(--color-accent);vertical-align:-3px;margin-left:2px"></span></span>
+        <span style="margin-left:auto;font-size:11px;color:rgba(233,233,237,.4)">14 results · 0.03s</span>
+      </div>
+      <div style="height:1px;background:var(--color-divider)"></div>
+
+      <div style="display:flex;flex:1;min-height:0">
+        <div style="width:430px;flex:none;padding:10px 8px;display:flex;flex-direction:column;gap:2px;overflow:hidden">
+          <div style="font:500 10px/1 'Inter';letter-spacing:.09em;text-transform:uppercase;color:rgba(233,233,237,.4);padding:6px 10px 8px">Articles</div>
+          <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:8px;background:rgba(145,132,217,.15)">
+            <span style="width:6px;height:6px;border-radius:50%;background:var(--color-accent);flex:none"></span>
+            <span style="font-size:13.5px">The <span style="background:rgba(145,132,217,.3);border-radius:2px">Ice</span> Ledger</span>
+            <span style="margin-left:auto;font-size:11px;color:rgba(233,233,237,.5)">12 backlinks</span>
+          </div>
+          <sc-for list="{{ results }}" as="r" hint-placeholder-count="5">
+            <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:8px">
+              <span style="width:6px;height:6px;border-radius:50%;background:#595d6c;flex:none"></span>
+              <span style="font-size:13.5px;color:rgba(233,233,237,.85)">{{ r.title }}</span>
+              <span style="margin-left:auto;font-size:11px;color:rgba(233,233,237,.4)">{{ r.meta }}</span>
+            </div>
+          </sc-for>
+          <div style="font:500 10px/1 'Inter';letter-spacing:.09em;text-transform:uppercase;color:rgba(233,233,237,.4);padding:14px 10px 8px">In post text</div>
+          <sc-for list="{{ postHits }}" as="h" hint-placeholder-count="2">
+            <div style="padding:8px 10px;border-radius:8px">
+              <div style="font-size:12.5px;color:rgba(233,233,237,.85)">{{ h.title }}</div>
+              <div style="font-size:11.5px;color:rgba(233,233,237,.5);line-height:1.4;margin-top:2px">{{ h.quote }}</div>
+            </div>
+          </sc-for>
+          <div style="margin-top:auto;padding:8px 10px;display:flex;align-items:center;gap:9px;border-radius:8px;box-shadow:inset 0 0 0 1px rgba(145,132,217,.3);color:var(--color-accent-200);font-size:12.5px">
+            <svg width="14" height="14" viewBox="0 0 256 256" fill="currentColor"><path d="M224 128a8 8 0 01-8 8h-80v80a8 8 0 01-16 0v-80H40a8 8 0 010-16h80V40a8 8 0 0116 0v80h80a8 8 0 018 8z"></path></svg>
+            Create article “ice contract”<span style="margin-left:auto;font:10px ui-monospace,monospace;opacity:.7">⌘↵</span>
+          </div>
+        </div>
+
+        <div style="flex:1;min-width:0;padding:16px 20px;background:#1c1e2b;display:flex;flex-direction:column;gap:13px;overflow:hidden">
+          <div>
+            <div style="font:500 10px/1 'Inter';letter-spacing:.11em;text-transform:uppercase;color:var(--color-accent);margin-bottom:6px">Note · Object</div>
+            <div style="font-size:21px;font-weight:500">The Ice Ledger</div>
+          </div>
+          <div style="font-size:13px;line-height:1.6;color:rgba(233,233,237,.78)">A tally book of cold-storage leases under <span class="wl">Kestrel Landing</span>. Reest claims three of the names on it are <span class="wl">House Calder</span> fronts.</div>
+          <div>
+            <div style="font:500 10px/1 'Inter';letter-spacing:.09em;text-transform:uppercase;color:rgba(233,233,237,.4);margin-bottom:9px">Backlinks · 12</div>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <sc-for list="{{ previewBacklinks }}" as="b" hint-placeholder-count="4">
+                <div style="display:flex;align-items:baseline;gap:8px;font-size:12px">
+                  <span style="color:rgba(233,233,237,.8)">{{ b.title }}</span>
+                  <span style="margin-left:auto;color:rgba(233,233,237,.35);font-size:11px">{{ b.kind }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+          <div style="margin-top:auto;font-size:11px;color:rgba(233,233,237,.35)">↵ open · ⇧↵ open in split · ⌥↵ insert as link</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+<p class="dv-next">Try next: “build out <a class="dv-oid" href="#1b">1b</a>’s selection popover as a real interaction” · “swap <a class="dv-oid" href="#1a">1a</a>’s sidebar for <a class="dv-oid" href="#1c">1c</a>’s map rail” · “show a character article in <a class="dv-oid" href="#1a">1a</a>’s layout”</p>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showSuggestions&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Linking&quot;,&quot;label&quot;:&quot;Auto-link suggestion banner&quot;},&quot;showBacklinkRail&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Linking&quot;,&quot;label&quot;:&quot;Backlink rail in 1a&quot;},&quot;compactSidebar&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Navigation&quot;,&quot;label&quot;:&quot;Collapse 1a sidebar to icons&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const p = this.props;
+    const node = (name, x, y, kind) => {
+      const sel = kind === 'sel', fac = kind === 'fac';
+      return {
+        name,
+        style: `position:absolute;left:${x}%;top:${y}%;transform:translate(-50%,-50%);white-space:nowrap;`
+          + `padding:${sel ? '10px 16px' : '7px 13px'};border-radius:${fac ? '4px' : '20px'};`
+          + `font-size:${sel ? '15px' : '13px'};font-weight:500;`
+          + (sel
+            ? 'background:#423a6a;color:#f5f4ff;box-shadow:0 0 0 1px #9184d9,0 0 28px rgba(145,132,217,.45)'
+            : fac
+              ? 'background:#232532;color:#cfd3e5;box-shadow:0 0 0 1px #595d6c'
+              : 'background:#232532;color:#cfd3e5;box-shadow:0 0 0 1px #3f424d')
+      };
+    };
+    const bar = (pct, tone) => `position:absolute;left:0;top:0;bottom:0;width:${pct}%;border-radius:2px;background:${tone}`;
+    return {
+      fullSidebar: (p.compactSidebar ?? false) === false,
+      showSuggestions: p.showSuggestions ?? true,
+      showBacklinkRail: p.showBacklinkRail ?? true,
+      places: [{ name: 'Kestrel Landing' }, { name: 'The Drowned Quarter' }, { name: 'Ferrymen’s Stair' }, { name: 'Saltworks 4' }],
+      placesB: [{ name: 'The Fish Gallery' }, { name: 'Calder Cold Storage' }, { name: 'Waterline, the' }],
+      backlinks: [
+        { title: 'Night Three — the fish gallery', kind: 'thread', quote: '…met Reest on the third gallery of the Undermarket, hands visible…' },
+        { title: 'Sirin Vale', kind: 'character', quote: 'Runs messages through the Undermarket when the tide is high.' },
+        { title: 'House Calder', kind: 'faction', quote: 'Keeps two collectors at the Undermarket stair.' },
+        { title: 'The Ice Ledger', kind: 'note', quote: 'Three names on it lease space below the waterline.' }
+      ],
+      railIcons: [{ abbr: 'TH' }, { abbr: 'CH' }, { abbr: 'PL' }, { abbr: 'FA' }, { abbr: '···' }],
+      posts: [
+        { initials: 'SV', author: 'saltandsignal', when: '5h ago · post 36', body: 'She counts the coins twice before she hands the letter over, which is not about money. “High tide,” she says, as if that settles who carries what.' },
+        { initials: 'VO', author: 'you · Verrin', when: '3h ago · post 37', body: 'Verrin lets it settle. The stair down is slick and the noise from the second gallery covers most of what anyone says on it, which is the point of meeting here.' }
+      ],
+      nodes: [
+        node('Verrin Oleska', 50, 48.5, 'sel'),
+        node('Sirin Vale', 24, 27, 'ch'),
+        node('Halvard Reest', 80, 30, 'ch'),
+        node('Tidewright Union', 26, 74, 'fac'),
+        node('House Calder', 77, 71.5, 'fac'),
+        node('Mother Adaya', 16, 54, 'ch'),
+        node('The Ice Ledger', 88.5, 91.5, 'ch')
+      ],
+      relations: [
+        { name: 'Sirin Vale', barStyle: bar(78, '#9184d9'), label: 'trusted' },
+        { name: 'Halvard Reest', barStyle: bar(46, '#7972a9'), label: 'wary' },
+        { name: 'House Calder', barStyle: bar(18, '#5d5294'), label: 'owed money' },
+        { name: 'Tidewright Union', barStyle: bar(62, '#7972a9'), label: 'former' }
+      ],
+      ghostLines: [1, 2, 3, 4, 5, 6, 7, 8].map((i) => ({
+        style: `height:9px;border-radius:3px;background:#262938;margin-bottom:11px;width:${[96, 88, 92, 70, 94, 84, 90, 62][i - 1]}%`
+      })),
+      results: [
+        { title: 'Calder Cold Storage', meta: 'place · 6' },
+        { title: 'Halvard Reest', meta: 'character · 9' },
+        { title: 'House Calder', meta: 'faction · 21' },
+        { title: 'Saltworks 4', meta: 'place · 3' },
+        { title: 'Winter lease terms', meta: 'note · 2' }
+      ],
+      postHits: [
+        { title: 'Night Three — the fish gallery · post 38', quote: '…wants to talk about the ice contract — says Calder is buying cold storage under three names…' },
+        { title: 'Before the Compact · post 12', quote: '…no ice contract holds past midwinter, not down there…' }
+      ],
+      previewBacklinks: [
+        { title: 'Halvard Reest', kind: 'character' },
+        { title: 'House Calder', kind: 'faction' },
+        { title: 'Night Three — the fish gallery', kind: 'thread' },
+        { title: 'The Undermarket', kind: 'place' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>
